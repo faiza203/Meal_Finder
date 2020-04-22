@@ -8,7 +8,7 @@ function searchMeal(e) {
   e.preventDefault();
   single_mealEl.innerHTMl = "";
   const term = search.value;
-  if (term.trim()){
+  if (term.trim()) {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
       .then((res) => res.json())
       .then((data) => {
@@ -17,8 +17,9 @@ function searchMeal(e) {
         if (data.meals === null) {
           resultHeading.innerHTML = `<p>There is no search result .Try again!</p>`;
         } else {
-          mealsEl.innerHTML = data.meals.map(
-            (meal) => `
+          mealsEl.innerHTML = data.meals
+            .map(
+              (meal) => `
             <div class="meal">
               <img src="${meal.strMealThumb}" alt="${meal.strMeal}" id="meal_img"/>
               <div class="meal-Info">
@@ -26,13 +27,23 @@ function searchMeal(e) {
               </div>
             </div>
           `
-          )
-          .join("");
+            )
+            .join("");
         }
       });
-      search.value="";
-    }else{
+    search.value = "";
+  } else {
     alert("Please insert a search term.");
-  };
-};
+  }
+}
 submit.addEventListener("submit", searchMeal);
+mealsEl.addEventListener("click", (e) => {
+  const mealInfo = e.path.find((item) => {
+    if (item.classList) {
+      item.classList.contains("meal_Info");
+    } else {
+      return false;
+    }
+  });
+  console.log(mealInfo);
+});

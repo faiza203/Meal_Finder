@@ -1,5 +1,3 @@
-const mealsEl = document.getElementById("meals");
-const resultHeading = document.getElementById("result-heading");
 const search = document.getElementById("search"),
   submit = document.getElementById("submit"),
   random = document.getElementById("random"),
